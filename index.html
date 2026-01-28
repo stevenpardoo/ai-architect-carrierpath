@@ -3,22 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Architect OS vFinal | Career Strategy</title>
+    <title>AI Architect OS | 4-Course Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.10/dayjs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.10/locale/es.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-
+    
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #F5F5F7;
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #F5F5F7; 
             color: #1D1D1F;
             overflow-x: hidden;
         }
-
-        /* Glass & Panel Styles */
+        
         .glass {
             background: rgba(255, 255, 255, 0.75);
             backdrop-filter: blur(20px);
@@ -31,20 +30,18 @@
             border: 1px solid rgba(255, 255, 255, 0.6);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
         }
-
-        /* Typography & Scroll */
+        
         h1, h2, h3 { letter-spacing: -0.02em; }
         .code-font { font-family: 'JetBrains Mono', monospace; }
-
+        
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #D1D1D6; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #8E8E93; }
 
-        /* Animations */
         .fade-in { animation: fadeIn 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
         .slide-up { animation: slideUp 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
-
+        
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -53,21 +50,19 @@
         }
 
         .chart-wrapper { position: relative; height: 300px; width: 100%; }
-
+        
         .timeline-line {
             position: absolute; left: 24px; top: 40px; bottom: -20px; width: 2px;
             background: #E5E5EA; z-index: 0;
         }
         .syllabus-item:last-child .timeline-line { display: none; }
 
-        /* Platzi Card Style */
         .platzi-card {
             background: linear-gradient(135deg, #121f3d 0%, #1c3643 100%);
             color: white;
             transition: transform 0.2s ease;
         }
-        .platzi-link:hover { text-decoration: underline; color: #98ca3f; }
-        .platzi-badge { background: #98ca3f; color: #121f3d; font-weight: bold; font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; }
+        .platzi-badge { background: #98ca3f; color: #121f3d; font-weight: bold; font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; display: inline-block; margin-top: 4px; }
     </style>
 </head>
 <body class="h-screen flex flex-col selection:bg-blue-100 selection:text-blue-900">
@@ -97,7 +92,7 @@
 
     <!-- Main Content -->
     <main class="flex-grow relative overflow-hidden bg-[#F5F5F7] w-full h-full">
-
+        
         <!-- DASHBOARD -->
         <section id="view-dashboard" class="absolute inset-0 overflow-y-auto p-6 md:p-12 custom-scroll w-full h-full">
             <div class="max-w-6xl mx-auto space-y-8 slide-up">
@@ -189,7 +184,7 @@
     <script>
         dayjs.locale('es');
         const startDate = dayjs('2026-02-02');
-
+        
         const roadmapData = [
             // BLOQUE 1: FUNDAMENTOS
             {
@@ -203,7 +198,9 @@
                 concept: "Memoria RAM",
                 courses: [
                     { name: "Curso de Python", url: "https://platzi.com/cursos/python/", date: "Jun 2024" },
-                    { name: "Curso de Fundamentos de Programación", url: "https://platzi.com/cursos/programacion-basica/", date: "Recurrente" }
+                    { name: "Curso de Fundamentos de Programación", url: "https://platzi.com/cursos/programacion-basica/", date: "Recurrente" },
+                    { name: "Curso de Introducción a la Terminal y Línea de Comandos", url: "https://platzi.com/cursos/terminal/", date: "2024" },
+                    { name: "Curso de Control de Versiones con Git y GitHub", url: "https://platzi.com/cursos/git-github/", date: "2024" }
                 ]
             },
             {
@@ -217,7 +214,9 @@
                 concept: "Lógica",
                 courses: [
                     { name: "Curso de Pensamiento Lógico: Algoritmos", url: "https://platzi.com/cursos/pensamiento-logico/", date: "Jun 2025" },
-                    { name: "Curso de Estructuras de Datos con Python", url: "https://platzi.com/cursos/estructuras-datos-python/", date: "2024" }
+                    { name: "Curso de Estructuras de Datos con Python", url: "https://platzi.com/cursos/estructuras-datos-python/", date: "2024" },
+                    { name: "Curso de Matemáticas para Programación", url: "https://platzi.com/cursos/matematicas-programacion/", date: "2024" },
+                    { name: "Curso de Complejidad Algorítmica con Python", url: "https://platzi.com/cursos/complejidad-algoritmica/", date: "2023" }
                 ]
             },
             {
@@ -231,7 +230,9 @@
                 concept: "Abstracción",
                 courses: [
                     { name: "Curso de Python: Comprehensions y Funciones", url: "https://platzi.com/cursos/python-funciones/", date: "2024" },
-                    { name: "Curso de Python: PIP y Entornos Virtuales", url: "https://platzi.com/cursos/python-pip/", date: "Feb 2023" }
+                    { name: "Curso de Python: PIP y Entornos Virtuales", url: "https://platzi.com/cursos/python-pip/", date: "Feb 2023" },
+                    { name: "Curso de Principios SOLID y Clean Code", url: "https://platzi.com/cursos/solid-clean/", date: "2024" },
+                    { name: "Curso de Debugging con Python", url: "https://platzi.com/cursos/python-debugging/", date: "2023" }
                 ]
             },
             {
@@ -245,7 +246,9 @@
                 concept: "Integración",
                 courses: [
                     { name: "Curso de Consumo de API REST con Python", url: "https://platzi.com/cursos/python-consumo-api/", date: "2024" },
-                    { name: "Curso de API First", url: "https://platzi.com/cursos/apifirst/", date: "Jul 2025" }
+                    { name: "Curso de API First", url: "https://platzi.com/cursos/apifirst/", date: "Jul 2025" },
+                    { name: "Curso de Fundamentos de Redes", url: "https://platzi.com/cursos/redes/", date: "2023" },
+                    { name: "Curso de Postman", url: "https://platzi.com/cursos/postman/", date: "2024" }
                 ]
             },
             // BLOQUE 2: DATOS
@@ -260,7 +263,9 @@
                 concept: "Estructura",
                 courses: [
                     { name: "Curso de PostgreSQL", url: "https://platzi.com/cursos/postgresql/", date: "May 2025" },
-                    { name: "Curso de Fundamentos de Bases de Datos", url: "https://platzi.com/cursos/bd/", date: "2024" }
+                    { name: "Curso de Fundamentos de Bases de Datos", url: "https://platzi.com/cursos/bd/", date: "2024" },
+                    { name: "Curso de Diseño de Bases de Datos", url: "https://platzi.com/cursos/diseno-bd/", date: "2023" },
+                    { name: "Curso de Álgebra Relacional (Fundamentos)", url: "https://platzi.com/cursos/algebra-bd/", date: "2023" }
                 ]
             },
             {
@@ -274,7 +279,9 @@
                 concept: "Persistencia",
                 courses: [
                     { name: "Curso de Backend con Python y API REST", url: "https://platzi.com/cursos/fastapi/", date: "Nov 2024" },
-                    { name: "Curso de SQL y MySQL", url: "https://platzi.com/cursos/sql-mysql/", date: "2024" }
+                    { name: "Curso de SQL y MySQL", url: "https://platzi.com/cursos/sql-mysql/", date: "2024" },
+                    { name: "Curso de Python y SQL (Integración)", url: "https://platzi.com/cursos/python-sql/", date: "2023" },
+                    { name: "Curso Práctico de SQL", url: "https://platzi.com/cursos/sql-practico/", date: "2024" }
                 ]
             },
             {
@@ -288,7 +295,9 @@
                 concept: "Transformación",
                 courses: [
                     { name: "Curso de Fundamentos de JavaScript", url: "https://platzi.com/cursos/javascript/", date: "Jul 2024" },
-                    { name: "Curso de Expresiones Regulares", url: "https://platzi.com/cursos/expresiones-regulares/", date: "2023" }
+                    { name: "Curso de Expresiones Regulares", url: "https://platzi.com/cursos/expresiones-regulares/", date: "2023" },
+                    { name: "Curso de Asincronismo con JavaScript", url: "https://platzi.com/cursos/asincronismo-js/", date: "2024" },
+                    { name: "Curso de Manipulación de Arrays en JS", url: "https://platzi.com/cursos/arrays/", date: "2023" }
                 ]
             },
             {
@@ -302,7 +311,9 @@
                 concept: "Servicios",
                 courses: [
                     { name: "Curso de FastAPI: Fundamentos", url: "https://platzi.com/cursos/fastapi/", date: "Nov 2024" },
-                    { name: "Curso de Principios SOLID y Clean Code", url: "https://platzi.com/cursos/solid-clean/", date: "2024" }
+                    { name: "Curso de FastAPI: Base de Datos y Autenticación", url: "https://platzi.com/cursos/fastapi-bd/", date: "2024" },
+                    { name: "Curso de Testing con Python", url: "https://platzi.com/cursos/python-testing/", date: "2024" },
+                    { name: "Curso de Introducción a la Web (Protocolos)", url: "https://platzi.com/cursos/web/", date: "2023" }
                 ]
             },
             // BLOQUE 3: IA
@@ -317,7 +328,9 @@
                 concept: "Inteligencia",
                 courses: [
                     { name: "Curso de Desarrollo de Chatbots con OpenAI", url: "https://platzi.com/cursos/openai-api-23/", date: "Jul 2023" },
-                    { name: "Curso de Ingeniería de Prompts", url: "https://platzi.com/cursos/prompt-engineering/", date: "2024" }
+                    { name: "Curso de Ingeniería de Prompts", url: "https://platzi.com/cursos/prompt-engineering/", date: "2024" },
+                    { name: "Curso de Ética en la Inteligencia Artificial", url: "https://platzi.com/cursos/etica-ia/", date: "2024" },
+                    { name: "Curso de Creación de Datos Sintéticos", url: "https://platzi.com/cursos/datos-sinteticos/", date: "2024" }
                 ]
             },
             {
@@ -331,7 +344,9 @@
                 concept: "Soberanía",
                 courses: [
                     { name: "Curso de Hugging Face y Transformers", url: "https://platzi.com/cursos/hugging-face/", date: "2024" },
-                    { name: "Curso de Modelos de Lenguaje Grandes (LLMs)", url: "https://platzi.com/cursos/llms/", date: "2024" }
+                    { name: "Curso de Modelos de Lenguaje Grandes (LLMs)", url: "https://platzi.com/cursos/llms/", date: "2024" },
+                    { name: "Curso de Introducción a Linux", url: "https://platzi.com/cursos/linux/", date: "2024" },
+                    { name: "Curso de Docker: Fundamentos", url: "https://platzi.com/cursos/docker/", date: "2024" }
                 ]
             },
             {
@@ -345,7 +360,9 @@
                 concept: "Contexto",
                 courses: [
                     { name: "Curso de LangChain", url: "https://platzi.com/cursos/langchain-chatbots/", date: "Jul 2023" },
-                    { name: "Curso de LangChain para Documentos", url: "https://platzi.com/cursos/langchain-documents/", date: "Nov 2023" }
+                    { name: "Curso de LangChain para Documentos", url: "https://platzi.com/cursos/langchain-documents/", date: "Nov 2023" },
+                    { name: "Curso de Bases de Datos Vectoriales", url: "https://platzi.com/cursos/vector-databases/", date: "2024" },
+                    { name: "Curso de Búsqueda Semántica con IA", url: "https://platzi.com/cursos/busqueda-semantica/", date: "2024" }
                 ]
             },
             {
@@ -359,7 +376,9 @@
                 concept: "Agencia",
                 courses: [
                     { name: "Curso de Creación de Agentes con IA", url: "https://platzi.com/cursos/agentes-ia/", date: "2024" },
-                    { name: "Curso de LangChain: Agentes", url: "https://platzi.com/cursos/langchain-agentes/", date: "2024" }
+                    { name: "Curso de LangChain: Agentes", url: "https://platzi.com/cursos/langchain-agentes/", date: "2024" },
+                    { name: "Curso de Orquestación con LangChain", url: "https://platzi.com/cursos/orquestacion-langchain/", date: "2024" },
+                    { name: "Curso de Desarrollo de Apps con LLMs", url: "https://platzi.com/cursos/apps-llms/", date: "2024" }
                 ]
             },
             // CAPSTONE
@@ -374,7 +393,9 @@
                 concept: "Diseño",
                 courses: [
                     { name: "Curso de Fundamentos de Arquitectura de Software", url: "https://platzi.com/cursos/fundamentos-arquitectura-software/", date: "May 2025" },
-                    { name: "Curso de Git y GitHub", url: "https://platzi.com/cursos/git-github/", date: "2024" }
+                    { name: "Curso de Git y GitHub", url: "https://platzi.com/cursos/git-github/", date: "2024" },
+                    { name: "Curso de Diagramas de Flujo", url: "https://platzi.com/cursos/diagramas-flujo/", date: "2023" },
+                    { name: "Curso de Metodologías Ágiles", url: "https://platzi.com/cursos/scrum/", date: "2024" }
                 ]
             },
             {
@@ -387,7 +408,10 @@
                 project: "Backend Funcional.",
                 concept: "Construcción",
                 courses: [
-                    { name: "Curso de Arquitectura de Software Aplicada", url: "https://platzi.com/cursos/software-avanzado/", date: "Jul 2025" }
+                    { name: "Curso de Arquitectura de Software Aplicada", url: "https://platzi.com/cursos/software-avanzado/", date: "Jul 2025" },
+                    { name: "Curso de Docker: Fundamentos", url: "https://platzi.com/cursos/docker/", date: "2024" },
+                    { name: "Curso de Despliegue a Producción", url: "https://platzi.com/cursos/deploy/", date: "2024" },
+                    { name: "Curso de CI/CD Básico", url: "https://platzi.com/cursos/cicd/", date: "2024" }
                 ]
             },
             {
@@ -400,7 +424,10 @@
                 project: "Sistema Inteligente.",
                 concept: "Inteligencia",
                 courses: [
-                    { name: "Curso de Ingeniería de Datos con Python", url: "https://platzi.com/cursos/ingenieria-datos-python/", date: "2024" }
+                    { name: "Curso de Ingeniería de Datos con Python", url: "https://platzi.com/cursos/ingenieria-datos-python/", date: "2024" },
+                    { name: "Curso de MLOps: Fundamentos", url: "https://platzi.com/cursos/mlops/", date: "2024" },
+                    { name: "Curso de Data Pipelines", url: "https://platzi.com/cursos/data-pipelines/", date: "2024" },
+                    { name: "Curso de Monitorización de Modelos", url: "https://platzi.com/cursos/monitorizacion-ml/", date: "2024" }
                 ]
             },
             {
@@ -413,7 +440,10 @@
                 project: "Proyecto Terminado.",
                 concept: "Despliegue",
                 courses: [
-                    { name: "Curso de Streamlit", url: "https://platzi.com/cursos/streamlit/", date: "2024" }
+                    { name: "Curso de Streamlit", url: "https://platzi.com/cursos/streamlit/", date: "2024" },
+                    { name: "Curso de Marca Personal", url: "https://platzi.com/cursos/marca-personal/", date: "2024" },
+                    { name: "Curso de Comunicación Efectiva", url: "https://platzi.com/cursos/comunicacion-efectiva/", date: "2024" },
+                    { name: "Curso de Portafolio y LinkedIn", url: "https://platzi.com/cursos/linkedin/", date: "2024" }
                 ]
             }
         ];
@@ -432,7 +462,7 @@
 
                 let statusClass = "border-gray-200 bg-white hover:border-gray-300";
                 let icon = `<div class="w-6 h-6 rounded-full bg-gray-100 text-gray-400 flex items-center justify-center text-xs font-bold">${item.week}</div>`;
-
+                
                 if (isCurrent) {
                     statusClass = "border-blue-500 bg-blue-50 shadow-sm";
                     icon = `<div class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold shadow-lg shadow-blue-500/30">Now</div>`;
@@ -469,14 +499,16 @@
             void container.offsetWidth;
             container.classList.add('slide-up');
 
-            // Build Courses HTML
+            // Build Courses HTML (Grid Layout 2x2)
             const coursesHtml = item.courses.map(c => `
-                <a href="${c.url}" target="_blank" class="flex items-center justify-between p-3 bg-white/10 rounded-lg hover:bg-white/20 transition-colors group border border-white/10">
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded bg-white text-[#121f3d] flex items-center justify-center font-bold text-xs">P</div>
-                        <span class="text-sm font-medium text-white group-hover:text-[#98ca3f] transition-colors">${c.name}</span>
+                <a href="${c.url}" target="_blank" class="flex flex-col justify-between p-4 bg-white/10 rounded-lg hover:bg-white/20 transition-colors group border border-white/10 h-full">
+                    <div>
+                        <div class="flex items-center gap-3 mb-2">
+                            <div class="w-6 h-6 rounded bg-white text-[#121f3d] flex items-center justify-center font-bold text-[10px] shrink-0">P</div>
+                            <span class="platzi-badge">${c.date}</span>
+                        </div>
+                        <span class="text-sm font-medium text-white group-hover:text-[#98ca3f] transition-colors leading-tight block">${c.name}</span>
                     </div>
-                    <span class="platzi-badge">${c.date}</span>
                 </a>
             `).join('');
 
@@ -486,9 +518,9 @@
                         <span class="px-3 py-1 rounded-full bg-white border border-gray-200 text-xs font-bold uppercase tracking-wide text-gray-500 shadow-sm">Semana ${item.week}</span>
                         <span class="text-gray-400 text-sm font-medium">${itemStart.format('DD MMMM, YYYY')}</span>
                     </div>
-
+                    
                     <h2 class="text-3xl md:text-5xl font-bold text-gray-900 mb-6 tracking-tight">${item.title}</h2>
-
+                    
                     <div class="glass p-6 rounded-2xl border-l-4 border-blue-600 mb-10 shadow-sm">
                         <p class="text-lg text-gray-700 leading-relaxed font-medium">"${item.desc}"</p>
                     </div>
@@ -505,7 +537,7 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
                         <!-- CHECKLIST / DoD -->
-                        <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
+                        <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 h-full">
                             <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wide mb-6 flex items-center gap-2">
                                 <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
                                 Definition of Done (Criterios de Éxito)
@@ -513,7 +545,7 @@
                             <ul class="space-y-4">
                                 ${item.criteria.map(c => `
                                     <li class="flex items-start gap-3 text-gray-700 leading-snug text-sm">
-                                        <input type="checkbox" class="mt-1 w-4 h-4 text-emerald-600 rounded focus:ring-emerald-500 border-gray-300" />
+                                        <input type="checkbox" class="mt-1 w-4 h-4 text-emerald-600 rounded focus:ring-emerald-500 border-gray-300 shrink-0" />
                                         <span>${c}</span>
                                     </li>
                                 `).join('')}
@@ -521,16 +553,16 @@
                         </div>
 
                         <!-- PROJECT -->
-                        <div class="flex flex-col gap-6">
-                            <div class="bg-gradient-to-br from-gray-900 to-gray-800 text-white p-8 rounded-3xl shadow-xl relative overflow-hidden group">
+                        <div class="flex flex-col gap-6 h-full">
+                            <div class="bg-gradient-to-br from-gray-900 to-gray-800 text-white p-8 rounded-3xl shadow-xl relative overflow-hidden group flex-grow">
                                 <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wide mb-2">Proyecto Práctico Semanal</h3>
                                 <p class="text-xl font-bold leading-snug relative z-10 group-hover:text-blue-200 transition-colors">${item.project}</p>
                                 <div class="mt-6 inline-flex items-center gap-2 text-xs font-mono text-gray-400 border border-gray-700 px-3 py-1 rounded-full">
                                     <span>GTX 1650 Compatible</span>
                                 </div>
                             </div>
-
-                            <div class="glass p-6 rounded-2xl flex items-center justify-between">
+                            
+                            <div class="glass p-6 rounded-2xl flex items-center justify-between shrink-0">
                                 <div>
                                     <p class="text-xs text-gray-500 uppercase font-bold">Foco Principal</p>
                                     <p class="text-lg font-bold text-blue-600">${item.concept}</p>
@@ -543,11 +575,11 @@
                     <!-- PLATZI COURSES SECTION -->
                     <div class="mt-10">
                         <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wide mb-4 flex items-center gap-2">
-                            <span class="text-xl">🚀</span> Ruta de Aprendizaje Platzi (Requerido)
+                            <span class="text-xl">🚀</span> Ruta de Aprendizaje Platzi (4 Cursos)
                         </h3>
                         <div class="platzi-card p-6 rounded-2xl shadow-lg">
-                            <p class="text-xs text-gray-300 mb-4 uppercase tracking-wider font-bold">Cursos Seleccionados para esta Semana</p>
-                            <div class="space-y-3">
+                            <p class="text-xs text-gray-300 mb-4 uppercase tracking-wider font-bold">Selección Curada para esta Semana</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                                 ${coursesHtml}
                             </div>
                         </div>
@@ -590,7 +622,7 @@
         function switchTab(viewId) {
             ['dashboard', 'roadmap', 'strategy'].forEach(id => {
                 document.getElementById(`view-${id}`).classList.add('hidden');
-                document.getElementById(`view-${id}`).classList.remove('fade-in');
+                document.getElementById(`view-${id}`).classList.remove('fade-in'); 
                 document.getElementById(`btn-${id}`).classList.remove('active');
             });
             const selectedView = document.getElementById(`view-${viewId}`);
