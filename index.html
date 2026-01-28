@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Architect OS | Dark Mode Edition</title>
+    <title>AI Architect OS | Portfolio Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.10/dayjs.min.js"></script>
@@ -16,11 +16,7 @@
             theme: {
                 extend: {
                     colors: {
-                        dark: {
-                            bg: '#000000',
-                            surface: '#1C1C1E',
-                            border: '#38383A'
-                        }
+                        dark: { bg: '#000000', surface: '#1C1C1E', border: '#38383A' }
                     }
                 }
             }
@@ -28,139 +24,64 @@
     </script>
 
     <style>
-        /* --- CORE VARIABLES --- */
         :root {
-            --bg-body: #F5F5F7;
-            --text-main: #1D1D1F;
-            --text-secondary: #6e6e73;
-            --glass-bg: rgba(255, 255, 255, 0.75);
-            --glass-border: rgba(255, 255, 255, 0.4);
-            --panel-bg: rgba(255, 255, 255, 0.85);
-            --timeline-line: #E5E5EA;
-            --accent-blue: #2563eb;
+            --bg-body: #F5F5F7; --text-main: #1D1D1F; --text-secondary: #6e6e73;
+            --glass-bg: rgba(255, 255, 255, 0.75); --glass-border: rgba(255, 255, 255, 0.4);
+            --panel-bg: rgba(255, 255, 255, 0.85); --timeline-line: #E5E5EA; --accent-blue: #2563eb;
         }
-
         [data-theme="dark"] {
-            --bg-body: #000000;
-            --text-main: #F5F5F7;
-            --text-secondary: #A1A1A6;
-            --glass-bg: rgba(28, 28, 30, 0.75);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --panel-bg: rgba(28, 28, 30, 0.85);
-            --timeline-line: #38383A;
-            --accent-blue: #3B82F6;
+            --bg-body: #000000; --text-main: #F5F5F7; --text-secondary: #A1A1A6;
+            --glass-bg: rgba(28, 28, 30, 0.75); --glass-border: rgba(255, 255, 255, 0.1);
+            --panel-bg: rgba(28, 28, 30, 0.85); --timeline-line: #38383A; --accent-blue: #3B82F6;
         }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-body); color: var(--text-main); transition: background-color 0.3s ease, color 0.3s ease; overflow-x: hidden; }
 
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background-color: var(--bg-body); 
-            color: var(--text-main);
-            transition: background-color 0.3s ease, color 0.3s ease;
-            overflow-x: hidden;
-        }
-
-        /* --- THEME SWITCHER ANIMATION (SUN/MOON) --- */
-        .theme-toggle {
-            cursor: pointer;
-            padding: 0;
-            border: none;
-            background: transparent;
-            color: var(--text-main);
-            position: relative;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: background 0.3s ease;
-        }
+        /* Theme Toggle */
+        .theme-toggle { cursor: pointer; padding: 0; border: none; background: transparent; color: var(--text-main); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: background 0.3s ease; }
         .theme-toggle:hover { background: rgba(128,128,128, 0.1); }
-        
         .sun-and-moon { width: 24px; height: 24px; }
         .sun-and-moon > :is(.moon, .sun, .sun-beams) { transform-origin: center; transition: transform .5s cubic-bezier(.5, 1.25, .75, 1.25); }
         .sun-and-moon > :is(.moon, .sun) { fill: var(--text-main); }
         .theme-toggle:is(:hover, :focus-visible) > .sun-and-moon > :is(.moon, .sun) { fill: var(--accent-blue); }
         .sun-and-moon > .sun-beams { stroke: var(--text-main); stroke-width: 2px; }
         .theme-toggle:is(:hover, :focus-visible) .sun-and-moon > .sun-beams { stroke: var(--accent-blue); }
-        
         [data-theme="dark"] .sun-and-moon > .sun { transform: scale(1.75); }
         [data-theme="dark"] .sun-and-moon > .sun-beams { opacity: 0; transform: rotate(-25deg); transition-duration: .15s; }
         [data-theme="dark"] .sun-and-moon > .moon > circle { transform: translateX(-7px); }
 
-        /* --- VIEW TRANSITION (THE CIRCULAR EXPANSION EFFECT) --- */
-        ::view-transition-old(root),
-        ::view-transition-new(root) {
-            animation: none;
-            mix-blend-mode: normal;
-        }
+        /* View Transition */
+        ::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
         ::view-transition-old(root) { z-index: 1; }
         ::view-transition-new(root) { z-index: 2147483646; }
         [data-theme="dark"]::view-transition-old(root) { z-index: 2147483646; }
         [data-theme="dark"]::view-transition-new(root) { z-index: 1; }
 
-        /* --- UI COMPONENTS --- */
-        .glass {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--glass-border);
-        }
-        .glass-panel {
-            background: var(--panel-bg);
-            backdrop-filter: blur(24px);
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        }
-        
+        /* UI */
+        .glass { background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); }
+        .glass-panel { background: var(--panel-bg); backdrop-filter: blur(24px); border: 1px solid var(--glass-border); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); }
         h1, h2, h3 { letter-spacing: -0.02em; }
         .code-font { font-family: 'JetBrains Mono', monospace; }
-        
-        /* Scrollbar */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #D1D1D6; border-radius: 10px; }
         [data-theme="dark"] ::-webkit-scrollbar-thumb { background: #48484A; }
         ::-webkit-scrollbar-thumb:hover { background: #8E8E93; }
-
-        /* Animations */
         .fade-in { animation: fadeIn 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
         .slide-up { animation: slideUp 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
         .nav-item { color: var(--text-secondary); }
-        .nav-item.active {
-            background: var(--bg-body);
-            color: var(--text-main);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            font-weight: 600;
-        }
-
+        .nav-item.active { background: var(--bg-body); color: var(--text-main); box-shadow: 0 2px 10px rgba(0,0,0,0.05); font-weight: 600; }
         .chart-wrapper { position: relative; height: 300px; width: 100%; }
-        
-        .timeline-line {
-            position: absolute; left: 24px; top: 40px; bottom: -20px; width: 2px;
-            background: var(--timeline-line); z-index: 0;
-        }
+        .timeline-line { position: absolute; left: 24px; top: 40px; bottom: -20px; width: 2px; background: var(--timeline-line); z-index: 0; }
         .syllabus-item:last-child .timeline-line { display: none; }
-
-        /* Platzi Card Style - Preserved but adapted */
-        .platzi-card {
-            background: linear-gradient(135deg, #0e1629 0%, #152733 100%);
-            color: white;
-            transition: transform 0.2s ease;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
+        .platzi-card { background: linear-gradient(135deg, #0e1629 0%, #152733 100%); color: white; transition: transform 0.2s ease; border: 1px solid rgba(255,255,255,0.1); }
         .platzi-badge { background: #98ca3f; color: #121f3d; font-weight: bold; font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; display: inline-block; margin-top: 4px; }
-        
-        /* Syllabus Item Hover in Dark Mode */
         [data-theme="dark"] .syllabus-item:hover { background-color: #1C1C1E; border-color: #38383A; }
     </style>
 </head>
 <body class="h-screen flex flex-col selection:bg-blue-500 selection:text-white transition-colors duration-300">
 
-    <!-- Nav -->
     <nav class="glass sticky top-0 z-50 h-16 flex items-center justify-between px-6 shrink-0 transition-colors duration-300">
         <div class="flex items-center gap-3">
             <div class="w-8 h-8 bg-black dark:bg-white text-white dark:text-black rounded-lg flex items-center justify-center font-bold text-sm shadow-lg transition-colors">AI</div>
@@ -169,39 +90,16 @@
                 <span class="block text-[10px] text-gray-500 font-medium uppercase tracking-wide">Automation Architect</span>
             </div>
         </div>
-        
-        <!-- Center Tabs -->
         <div class="hidden md:flex bg-gray-100/80 dark:bg-white/10 p-1 rounded-xl backdrop-blur-md transition-colors">
             <button onclick="switchTab('dashboard')" id="btn-dashboard" class="nav-item active px-5 py-1.5 rounded-lg text-sm transition-all duration-200">Diagnóstico</button>
             <button onclick="switchTab('roadmap')" id="btn-roadmap" class="nav-item px-5 py-1.5 rounded-lg text-sm transition-all duration-200">Roadmap Fase 1</button>
             <button onclick="switchTab('strategy')" id="btn-strategy" class="nav-item px-5 py-1.5 rounded-lg text-sm transition-all duration-200">Protocolo Diario</button>
         </div>
-
-        <!-- Right Controls -->
         <div class="flex items-center gap-4">
-            <!-- THEME SWITCHER -->
             <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode">
-                <svg class="sun-and-moon" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
-                    <circle class="sun" cx="12" cy="12" r="6" mask="url(#moon-mask)" fill="currentColor" />
-                    <g class="sun-beams" stroke="currentColor">
-                        <line x1="12" y1="1" x2="12" y2="3" />
-                        <line x1="12" y1="21" x2="12" y2="23" />
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-                        <line x1="1" y1="12" x2="3" y2="12" />
-                        <line x1="21" y1="12" x2="23" y2="12" />
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-                    </g>
-                    <mask class="moon" id="moon-mask">
-                        <rect x="0" y="0" width="100%" height="100%" fill="white" />
-                        <circle cx="24" cy="10" r="6" fill="black" />
-                    </mask>
-                </svg>
+                <svg class="sun-and-moon" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24"><circle class="sun" cx="12" cy="12" r="6" mask="url(#moon-mask)" fill="currentColor" /><g class="sun-beams" stroke="currentColor"><line x1="12" y1="1" x2="12" y2="3" /><line x1="12" y1="21" x2="12" y2="23" /><line x1="4.22" y1="4.22" x2="5.64" y2="5.64" /><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" /><line x1="1" y1="12" x2="3" y2="12" /><line x1="21" y1="12" x2="23" y2="12" /><line x1="4.22" y1="19.78" x2="5.64" y2="18.36" /><line x1="18.36" y1="5.64" x2="19.78" y2="4.22" /></g><mask class="moon" id="moon-mask"><rect x="0" y="0" width="100%" height="100%" fill="white" /><circle cx="24" cy="10" r="6" fill="black" /></mask></svg>
             </button>
-
             <div class="w-px h-6 bg-gray-300 dark:bg-gray-700 mx-1"></div>
-
             <div class="hidden sm:block text-right">
                 <div class="text-[10px] text-gray-500 font-bold uppercase">Inicio Fase 1</div>
                 <div class="text-xs font-semibold">02 Feb, 2026</div>
@@ -210,17 +108,13 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main class="flex-grow relative overflow-hidden w-full h-full transition-colors duration-300">
         
-        <!-- DASHBOARD -->
         <section id="view-dashboard" class="absolute inset-0 overflow-y-auto p-6 md:p-12 custom-scroll w-full h-full">
             <div class="max-w-6xl mx-auto space-y-8 slide-up">
                 <div class="text-center mb-10">
                     <h1 class="text-4xl font-bold mb-3 tracking-tight">Tu Perfil vs. El Mercado</h1>
-                    <p class="text-lg text-gray-500 max-w-2xl mx-auto">
-                        Transición Estratégica: <span class="font-semibold dark:text-gray-200">Product Owner</span> ➔ <span class="text-blue-600 dark:text-blue-400 font-semibold">Arquitecto de Automatización</span>.
-                    </p>
+                    <p class="text-lg text-gray-500 max-w-2xl mx-auto">Transición Estratégica: <span class="font-semibold dark:text-gray-200">Product Owner</span> ➔ <span class="text-blue-600 dark:text-blue-400 font-semibold">Arquitecto de Automatización</span>.</p>
                 </div>
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     <div class="glass-panel rounded-2xl p-8 flex flex-col justify-center transition-colors">
@@ -228,17 +122,11 @@
                         <div class="space-y-6">
                             <div class="flex gap-4">
                                 <div class="w-10 h-10 rounded-full bg-red-50 dark:bg-red-900/20 text-red-500 flex items-center justify-center text-xl shrink-0">💻</div>
-                                <div>
-                                    <h4 class="font-bold">Programación (Python)</h4>
-                                    <p class="text-sm text-gray-500 mt-1">Estado: Inicial. Objetivo: Escribir scripts autónomos sin copiar/pegar ciegamente.</p>
-                                </div>
+                                <div><h4 class="font-bold">Programación (Python)</h4><p class="text-sm text-gray-500 mt-1">Estado: Inicial. Objetivo: Scripts autónomos.</p></div>
                             </div>
                             <div class="flex gap-4">
                                 <div class="w-10 h-10 rounded-full bg-amber-50 dark:bg-amber-900/20 text-amber-500 flex items-center justify-center text-xl shrink-0">🗄️</div>
-                                <div>
-                                    <h4 class="font-bold">Datos (SQL)</h4>
-                                    <p class="text-sm text-gray-500 mt-1">Estado: Consultor. Objetivo: Arquitecto (Diseñar esquemas normalizados).</p>
-                                </div>
+                                <div><h4 class="font-bold">Datos (SQL)</h4><p class="text-sm text-gray-500 mt-1">Estado: Consultor. Objetivo: Arquitecto.</p></div>
                             </div>
                         </div>
                     </div>
@@ -248,17 +136,13 @@
                     </div>
                 </div>
                 <div class="text-center mt-8">
-                    <button onclick="switchTab('roadmap')" class="bg-black dark:bg-white text-white dark:text-black px-8 py-3 rounded-full font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all">
-                        Ir al Plan de Ejecución ➔
-                    </button>
+                    <button onclick="switchTab('roadmap')" class="bg-black dark:bg-white text-white dark:text-black px-8 py-3 rounded-full font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all">Ir al Plan de Ejecución ➔</button>
                 </div>
             </div>
         </section>
 
-        <!-- ROADMAP -->
         <section id="view-roadmap" class="absolute inset-0 hidden w-full h-full">
             <div class="flex flex-col md:flex-row w-full h-full">
-                <!-- Sidebar List -->
                 <div class="w-full md:w-1/3 lg:w-1/4 bg-white/50 dark:bg-black/50 backdrop-blur-xl border-r border-gray-200 dark:border-gray-800 overflow-y-auto custom-scroll flex flex-col z-10 h-full shrink-0 transition-colors">
                     <div class="p-5 border-b border-gray-100 dark:border-gray-800 bg-white/80 dark:bg-black/80 sticky top-0 z-20 backdrop-blur shrink-0 transition-colors">
                         <h2 class="font-bold">Syllabus 16 Semanas</h2>
@@ -266,33 +150,30 @@
                     </div>
                     <div id="timeline-container" class="p-3 space-y-1 pb-20"></div>
                 </div>
-                <!-- Content Area -->
                 <div class="flex-grow overflow-y-auto custom-scroll relative h-full w-full">
                     <div id="detail-content" class="max-w-4xl mx-auto p-6 md:p-12 min-h-full flex flex-col justify-start"></div>
                 </div>
             </div>
         </section>
 
-        <!-- STRATEGY -->
         <section id="view-strategy" class="absolute inset-0 overflow-y-auto p-6 md:p-12 custom-scroll w-full h-full hidden">
             <div class="max-w-4xl mx-auto slide-up pb-20">
                 <h2 class="text-3xl font-bold mb-8">Protocolo Diario</h2>
                 <div class="grid gap-6">
                     <div class="glass-panel p-8 rounded-2xl transition-colors">
                         <h3 class="text-xl font-bold">Sesión de 2 Horas</h3>
-                        <p class="text-gray-500 mt-2">La consistencia le gana a la intensidad. Sigue este bloque sagrado.</p>
                         <ul class="mt-4 space-y-2 text-sm text-gray-600 dark:text-gray-400">
-                            <li><strong>Min 0-20 (Teoría):</strong> Ver la lección específica del temario. Tomar notas conceptuales.</li>
-                            <li><strong>Min 20-80 (Práctica):</strong> Abrir VS Code. Intentar replicar el código sin mirar. Fallar. Arreglar el error.</li>
-                            <li><strong>Min 80-120 (Proyecto):</strong> Avanzar un paso pequeño en el Proyecto Semanal.</li>
+                            <li><strong>Min 0-20:</strong> Teoría y notas conceptuales.</li>
+                            <li><strong>Min 20-80:</strong> Deep Work en VS Code. Práctica y error.</li>
+                            <li><strong>Min 80-120:</strong> Proyecto Semanal.</li>
                         </ul>
                     </div>
                     <div class="glass-panel p-8 rounded-2xl bg-gray-900 text-white transition-colors">
                         <h3 class="text-lg font-bold mb-4 text-white">Hardware Config (GTX 1650)</h3>
                         <ul class="space-y-3 text-sm text-gray-300 font-mono">
                             <li>✓ VS Code (Editor) + Extensiones Python.</li>
-                            <li>✓ Docker Desktop (Backend WSL2 para rendimiento).</li>
-                            <li>✓ LM Studio (Para cargar modelos GGUF en GPU 1).</li>
+                            <li>✓ Docker Desktop (WSL2).</li>
+                            <li>✓ LM Studio (Para cargar GGUF en GPU 1).</li>
                         </ul>
                     </div>
                 </div>
@@ -306,13 +187,11 @@
         const startDate = dayjs('2026-02-02');
         let currentTheme = localStorage.getItem('theme') || 'light';
 
-        // --- DARK MODE LOGIC (VIEW TRANSITIONS) ---
         function updateChartColors() {
             const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
             const gridColor = isDark ? '#333' : '#e5e7eb';
             const pointColor = isDark ? '#FFF' : '#2563eb';
             const labelColor = isDark ? '#A1A1A6' : '#64748b';
-
             if (window.myChart) {
                 window.myChart.options.scales.r.grid.color = gridColor;
                 window.myChart.options.scales.r.angleLines.color = gridColor;
@@ -325,71 +204,54 @@
 
         function setTheme(theme) {
             document.documentElement.setAttribute('data-theme', theme);
-            if (theme === 'dark') {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-            }
+            if (theme === 'dark') document.documentElement.classList.add('dark');
+            else document.documentElement.classList.remove('dark');
             localStorage.setItem('theme', theme);
             currentTheme = theme;
             updateChartColors();
         }
-
-        // Initialize Theme
         setTheme(currentTheme);
 
         document.getElementById('theme-toggle').addEventListener('click', (e) => {
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-
-            // Check if View Transitions API is supported
-            if (!document.startViewTransition) {
-                setTheme(newTheme);
-                return;
-            }
-
-            // Get click position for the circle effect
-            const x = e.clientX;
-            const y = e.clientY;
-
-            const endRadius = Math.hypot(
-                Math.max(x, innerWidth - x),
-                Math.max(y, innerHeight - y)
-            );
-
-            const transition = document.startViewTransition(() => {
-                setTheme(newTheme);
-            });
-
+            if (!document.startViewTransition) { setTheme(newTheme); return; }
+            const x = e.clientX; const y = e.clientY;
+            const endRadius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+            const transition = document.startViewTransition(() => setTheme(newTheme));
             transition.ready.then(() => {
-                const clipPath = [
-                    `circle(0px at ${x}px ${y}px)`,
-                    `circle(${endRadius}px at ${x}px ${y}px)`,
-                ];
-                
-                document.documentElement.animate(
-                    {
-                        clipPath: currentTheme === 'dark' ? clipPath : [...clipPath].reverse(),
-                    },
-                    {
-                        duration: 400,
-                        easing: "ease-in",
-                        pseudoElement: currentTheme === 'dark' ? "::view-transition-new(root)" : "::view-transition-old(root)",
-                    }
-                );
+                const clipPath = [`circle(0px at ${x}px ${y}px)`, `circle(${endRadius}px at ${x}px ${y}px)`];
+                document.documentElement.animate({ clipPath: currentTheme === 'dark' ? clipPath : [...clipPath].reverse() }, { duration: 400, easing: "ease-in", pseudoElement: currentTheme === 'dark' ? "::view-transition-new(root)" : "::view-transition-old(root)" });
             });
         });
-        
-        // --- DATA & CONTENT ---
+
+        // --- UPDATED DATA WITH IMPACTFUL PROJECTS ---
         const roadmapData = [
-             {
+            {
                 week: 1,
                 block: "Fundamentos Técnicos",
                 title: "Lógica & Sintaxis",
-                desc: "Hablar el idioma de la máquina. Variables, Tipos y Consola.",
-                study_guide: "<div><h4 class='font-bold mb-2'>1. Variables y Tipos</h4><p class='text-sm text-gray-500 mb-2'>Diferencia estricta entre <code>int</code>, <code>str</code>, <code>bool</code>. <code>'5' != 5</code>.</p><h4 class='font-bold mb-2'>2. I/O</h4><p class='text-sm text-gray-500'>Uso de <code>print()</code> y <code>input()</code>.</p></div>",
+                desc: "Esta semana no harás IA. Aprenderás a hablar el idioma de la máquina.",
+                study_guide: `
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-bold text-gray-900 dark:text-gray-100 mb-2">1. Variables y Tipos de Datos</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Una variable es un espacio nombrado en memoria. Debes entender estrictamente la diferencia entre:</p>
+                            <ul class="list-disc list-inside text-sm text-gray-600 dark:text-gray-400 ml-4 font-mono">
+                                <li>String ("Hola", "123") - Texto</li>
+                                <li>Integer (10, -5) - Números enteros</li>
+                                <li>Float (10.5, 3.1416) - Decimales</li>
+                                <li>Boolean (True, False) - Lógica binaria</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 dark:text-gray-100 mb-2">2. Entrada y Salida (I/O)</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Cómo el programa se comunica. <code>print()</code> es debug. <code>input()</code> es interacción.</p>
+                        </div>
+                    </div>
+                `,
                 criteria: ["Explicar diferencia '5' vs 5", "Script suma inputs usuario", "Uso de f-strings", "Ejecutar .py en terminal"],
-                project: "Calculadora de ROI: Script CLI que pide Costo/Ingreso y calcula margen.",
-                concept: "Memoria RAM",
+                project: "Calculadora de Unit Economics: Script que recibe CAC y LTV, y calcula el ROI de un SaaS. Muestra si es rentable.",
+                concept: "Scripting Básico",
                 courses: [
                     { name: "Curso de Python", url: "https://platzi.com/cursos/python/", date: "Jun 2024" },
                     { name: "Fundamentos de Programación", url: "https://platzi.com/cursos/programacion-basica/", date: "Recurrente" },
@@ -401,11 +263,22 @@
                 week: 2,
                 block: "Fundamentos Técnicos",
                 title: "Control de Flujo",
-                desc: "Decisiones automáticas. If, Else y Bucles.",
-                study_guide: "<div><h4 class='font-bold mb-2'>1. Condicionales</h4><p class='text-sm text-gray-500 mb-2'><code>if/else</code> y lógica booleana.</p><h4 class='font-bold mb-2'>2. Colecciones</h4><p class='text-sm text-gray-500'>Listas <code>[]</code> y Diccionarios <code>{}</code>.</p></div>",
-                criteria: ["Lógica par/impar", "Bucle for en lista", "Acceso a Diccionario", "Manejo IndexError"],
-                project: "Clasificador de Leads: Filtrar usuarios VIP.",
-                concept: "Lógica",
+                desc: "Cómo hacer que el código tome caminos diferentes basándose en datos.",
+                study_guide: `
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-bold text-gray-900 dark:text-gray-100 mb-2">1. Condicionales</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Estructuras <code>if</code>, <code>elif</code>, <code>else</code>. Son la base de la lógica de negocio.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 dark:text-gray-100 mb-2">2. Colecciones de Datos</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Agrupar datos en <strong>Listas</strong> <code>[]</code> y <strong>Diccionarios</strong> <code>{}</code> (JSON).</p>
+                        </div>
+                    </div>
+                `,
+                criteria: ["Lógica par/impar con if/else", "Bucle for iterando una lista", "Acceso a Diccionario anidado", "Manejo básico de IndexError"],
+                project: "Lead Scoring Engine: Recibe lista de leads (JSON), asigna puntaje por cargo/presupuesto y filtra 'Hot Leads'.",
+                concept: "Procesamiento de Listas",
                 courses: [
                     { name: "Pensamiento Lógico: Algoritmos", url: "https://platzi.com/cursos/pensamiento-logico/", date: "Jun 2025" },
                     { name: "Estructuras de Datos Python", url: "https://platzi.com/cursos/estructuras-datos-python/", date: "2024" },
@@ -417,11 +290,22 @@
                 week: 3,
                 block: "Fundamentos Técnicos",
                 title: "Modularidad",
-                desc: "Funciones, Scope y Librerías.",
-                study_guide: "<div><h4 class='font-bold mb-2'>1. Funciones</h4><p class='text-sm text-gray-500 mb-2'><code>def</code>, return y scope.</p><h4 class='font-bold mb-2'>2. Entornos</h4><p class='text-sm text-gray-500'>Entornos virtuales (venv).</p></div>",
-                criteria: ["Función con return", "Importar librerías", "Explicar Scope", "Llamada entre funciones"],
-                project: "Conversor Modular: Archivo utils.py.",
-                concept: "Abstracción",
+                desc: "Cómo evitar repetir código y crear herramientas reutilizables.",
+                study_guide: `
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-bold text-gray-900 dark:text-gray-100 mb-2">1. Funciones (Functions)</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Bloques encapsulados con <code>def</code>. Parámetros y Return. Entender Scope local.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 dark:text-gray-100 mb-2">2. Librerías (Modules)</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Uso de <code>import</code> para traer código externo (math, random, datetime).</p>
+                        </div>
+                    </div>
+                `,
+                criteria: ["Definir función con return", "Importar librería math/random", "Explicar Scope local vs global", "Llamar función dentro de otra"],
+                project: "Librería de Utilidades E-commerce: Archivo 'utils.py' con funciones de cálculo de IVA y envíos, usado en 'main.py'.",
+                concept: "Código Reutilizable",
                 courses: [
                     { name: "Python: Funciones", url: "https://platzi.com/cursos/python-funciones/", date: "2024" },
                     { name: "Entornos Virtuales y PIP", url: "https://platzi.com/cursos/python-pip/", date: "Feb 2023" },
@@ -433,11 +317,22 @@
                 week: 4,
                 block: "Fundamentos Técnicos",
                 title: "APIs & JSON",
-                desc: "Conectividad con internet.",
-                study_guide: "<div><h4 class='font-bold mb-2'>1. Requests</h4><p class='text-sm text-gray-500 mb-2'>GET/POST y librería <code>requests</code>.</p><h4 class='font-bold mb-2'>2. JSON</h4><p class='text-sm text-gray-500'>Parsing texto a objetos.</p></div>",
-                criteria: ["GET a API pública", "JSON parsing", "Try/Except", "Uso de .env"],
-                project: "Consultor Crypto: Precio BTC API.",
-                concept: "Integración",
+                desc: "El puente entre tu código y el internet. Automatización real.",
+                study_guide: `
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-bold text-gray-900 dark:text-gray-100 mb-2">1. Protocolo HTTP</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">GET (Consultar), POST (Enviar). Códigos 200 (OK), 404 (Error).</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 dark:text-gray-100 mb-2">2. JSON en Python</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Convertir texto JSON a Diccionarios Python (<code>json.loads</code>).</p>
+                        </div>
+                    </div>
+                `,
+                criteria: ["Hacer GET a API pública", "Parsear respuesta JSON", "Bloque Try/Except para errores", "Leer API Key de archivo .env"],
+                project: "Competitor Price Tracker: Consulta API pública de productos, detecta bajadas de precio y alerta.",
+                concept: "Extracción de Datos",
                 courses: [
                     { name: "Consumo API REST Python", url: "https://platzi.com/cursos/python-consumo-api/", date: "2024" },
                     { name: "API First", url: "https://platzi.com/cursos/apifirst/", date: "Jul 2025" },
@@ -450,11 +345,22 @@
                 week: 5,
                 block: "Ingeniería de Datos",
                 title: "Diseño SQL",
-                desc: "Modelo Relacional y DDL.",
-                study_guide: "<div><h4 class='font-bold mb-2'>1. Modelo Relacional</h4><p class='text-sm text-gray-500 mb-2'>PKs, FKs y Tipos.</p><h4 class='font-bold mb-2'>2. DDL</h4><p class='text-sm text-gray-500'>CREATE TABLE.</p></div>",
-                criteria: ["Instalar Postgres", "Crear DB local", "Script CREATE TABLE", "Entender UNIQUE"],
-                project: "Arquitectura DB: Esquema E-commerce.",
-                concept: "Estructura",
+                desc: "Aprender a estructurar la información de forma profesional.",
+                study_guide: `
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-bold text-gray-900 dark:text-gray-100 mb-2">1. Modelo Relacional</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Diseñar tablas (Entidades). PKs, FKs y Tipos de Datos (VARCHAR, INT).</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 dark:text-gray-100 mb-2">2. DDL (Create)</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Comandos <code>CREATE TABLE</code> para definir la estructura.</p>
+                        </div>
+                    </div>
+                `,
+                criteria: ["Instalar Postgres/DBeaver", "Crear DB local", "Script CREATE TABLE correcto", "Entender Constraint UNIQUE"],
+                project: "Logistics ERP Schema: Diseño SQL para un sistema de envíos (Conductores, Rutas, Paquetes).",
+                concept: "Modelado de Datos",
                 courses: [
                     { name: "PostgreSQL", url: "https://platzi.com/cursos/postgresql/", date: "May 2025" },
                     { name: "Fundamentos Bases de Datos", url: "https://platzi.com/cursos/bd/", date: "2024" },
@@ -466,11 +372,22 @@
                 week: 6,
                 block: "Ingeniería de Datos",
                 title: "SQL + Python",
-                desc: "Manipulación de datos (DML).",
-                study_guide: "<div><h4 class='font-bold mb-2'>1. DML</h4><p class='text-sm text-gray-500 mb-2'>CRUD Operations.</p><h4 class='font-bold mb-2'>2. Drivers</h4><p class='text-sm text-gray-500'>Psycopg2 y cursores.</p></div>",
-                criteria: ["INSERT desde Python", "SELECT y print", "Prevenir SQL Injection", "Commit"],
-                project: "Ingestador CSV: Excel a Postgres.",
-                concept: "Persistencia",
+                desc: "Manipular la base de datos desde código Python.",
+                study_guide: `
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-bold text-gray-900 dark:text-gray-100 mb-2">1. SQL DML</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">CRUD: INSERT, SELECT, UPDATE, DELETE.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 dark:text-gray-100 mb-2">2. Drivers de BD</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Librería <code>psycopg2</code>. Conceptos de Cursor y Commit.</p>
+                        </div>
+                    </div>
+                `,
+                criteria: ["INSERT desde Python", "SELECT y mostrar resultados", "Explicar SQL Injection", "Uso de Commit()"],
+                project: "Inventory Sync Engine: Lee CSV de stock, valida datos con Python y actualiza Postgres.",
+                concept: "ETL Pipelines",
                 courses: [
                     { name: "Backend Python API REST", url: "https://platzi.com/cursos/fastapi/", date: "Nov 2024" },
                     { name: "SQL y MySQL", url: "https://platzi.com/cursos/sql-mysql/", date: "2024" },
@@ -482,11 +399,22 @@
                 week: 7,
                 block: "Ingeniería de Datos",
                 title: "JS para n8n",
-                desc: "Nodo Code y Lógica Avanzada.",
-                study_guide: "<div><h4 class='font-bold mb-2'>1. JS Moderno</h4><p class='text-sm text-gray-500 mb-2'>Arrays y Objetos.</p><h4 class='font-bold mb-2'>2. Regex</h4><p class='text-sm text-gray-500'>Validación texto.</p></div>",
-                criteria: ["JS map/filter", "Regex email", "Fechas JS", "Estructura n8n"],
-                project: "Limpiador Data: Workflow n8n JS.",
-                concept: "Transformación",
+                desc: "Dominar el nodo 'Code' de n8n para lógica compleja.",
+                study_guide: `
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-bold text-gray-900 dark:text-gray-100 mb-2">1. Javascript Moderno</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Sintaxis básica. Métodos de Arrays: <code>.map()</code>, <code>.filter()</code>.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 dark:text-gray-100 mb-2">2. Regex</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Expresiones regulares para validar formatos (emails, teléfonos).</p>
+                        </div>
+                    </div>
+                `,
+                criteria: ["Función JS map/filter", "Regex básico email", "Manipulación de Fechas JS", "Estructura items[] de n8n"],
+                project: "Enriquecedor de Leads CRM: Workflow n8n con nodo Code que valida y formatea datos de entrada.",
+                concept: "Lógica Low-Code",
                 courses: [
                     { name: "Fundamentos JavaScript", url: "https://platzi.com/cursos/javascript/", date: "Jul 2024" },
                     { name: "Expresiones Regulares", url: "https://platzi.com/cursos/expresiones-regulares/", date: "2023" },
@@ -498,11 +426,22 @@
                 week: 8,
                 block: "Ingeniería de Datos",
                 title: "FastAPI Backend",
-                desc: "Creación de APIs.",
-                study_guide: "<div><h4 class='font-bold mb-2'>1. FastAPI</h4><p class='text-sm text-gray-500 mb-2'>Endpoints y Decoradores.</p><h4 class='font-bold mb-2'>2. Uvicorn</h4><p class='text-sm text-gray-500'>Servidor web.</p></div>",
-                criteria: ["Server Hello World", "POST JSON", "Validación", "Swagger UI"],
-                project: "Microservicio Texto: API conteo.",
-                concept: "Servicios",
+                desc: "Crear tus propias APIs (Microservicios).",
+                study_guide: `
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-bold text-gray-900 dark:text-gray-100 mb-2">1. Framework FastAPI</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Crear endpoints con decoradores <code>@app.get</code>.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 dark:text-gray-100 mb-2">2. Servidor Web</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Uvicorn para exponer tu API localmente.</p>
+                        </div>
+                    </div>
+                `,
+                criteria: ["Levantar servidor local", "Endpoint POST que recibe JSON", "Validación de tipos de datos", "Probar en Swagger UI"],
+                project: "API de Scoring de Crédito: Endpoint que recibe datos financieros y devuelve riesgo y cupo aprobado.",
+                concept: "Microservicios",
                 courses: [
                     { name: "FastAPI Fundamentos", url: "https://platzi.com/cursos/fastapi/", date: "Nov 2024" },
                     { name: "FastAPI DB Auth", url: "https://platzi.com/cursos/fastapi-bd/", date: "2024" },
@@ -514,12 +453,23 @@
             {
                 week: 9,
                 block: "AI Engineering",
-                title: "OpenAI API",
-                desc: "Programación de LLMs.",
-                study_guide: "<div><h4 class='font-bold mb-2'>1. API Client</h4><p class='text-sm text-gray-500 mb-2'>Auth y ChatCompletion.</p><h4 class='font-bold mb-2'>2. Roles</h4><p class='text-sm text-gray-500'>System, User, Assistant.</p></div>",
-                criteria: ["Llamada GPT-4", "System Prompt", "Parsear JSON", "Loop chat"],
-                project: "Traductor Corporativo.",
-                concept: "Inteligencia",
+                title: "Programación de LLMs",
+                desc: "Integrar inteligencia artificial en el código Python.",
+                study_guide: `
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-bold text-gray-900 dark:text-gray-100 mb-2">1. OpenAI API</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Cliente, Auth y ChatCompletion.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 dark:text-gray-100 mb-2">2. Roles de Mensaje</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">System (Instrucciones), User (Input), Assistant (Output).</p>
+                        </div>
+                    </div>
+                `,
+                criteria: ["Llamada básica a GPT-4", "Configurar System Prompt", "Parsear respuesta JSON", "Loop de chat en consola"],
+                project: "Extractor de Entidades Legales: Script que recibe contratos texto y devuelve JSON con fechas y montos.",
+                concept: "Ingeniería de Prompts",
                 courses: [
                     { name: "Chatbots OpenAI", url: "https://platzi.com/cursos/openai-api-23/", date: "Jul 2023" },
                     { name: "Ingeniería de Prompts", url: "https://platzi.com/cursos/prompt-engineering/", date: "2024" },
@@ -530,12 +480,23 @@
             {
                 week: 10,
                 block: "AI Engineering",
-                title: "IA Local (GGUF)",
-                desc: "Modelos Offline (GPU).",
-                study_guide: "<div><h4 class='font-bold mb-2'>1. GGUF</h4><p class='text-sm text-gray-500 mb-2'>Cuantización.</p><h4 class='font-bold mb-2'>2. Ollama</h4><p class='text-sm text-gray-500'>Inferencia local.</p></div>",
-                criteria: ["Instalar Ollama", "Correr modelo", "Python a Localhost", "Monitor GPU"],
-                project: "Chatbot Offline.",
-                concept: "Soberanía",
+                title: "IA Local (Offline)",
+                desc: "Ejecutar modelos en tu hardware propio (GTX 1650).",
+                study_guide: `
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-bold text-gray-900 dark:text-gray-100 mb-2">1. Modelos GGUF</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Modelos cuantizados (comprimidos) para caber en 4GB VRAM.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 dark:text-gray-100 mb-2">2. Inferencia Local</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Uso de <strong>Ollama</strong> como API local.</p>
+                        </div>
+                    </div>
+                `,
+                criteria: ["Instalar Ollama", "Correr modelo en CLI", "Conectar Python a Localhost", "Verificar uso de GPU"],
+                project: "Analista de PII Local: Script que detecta y censura datos sensibles (emails, CCs) sin salir a internet.",
+                concept: "Inferencia Privada",
                 courses: [
                     { name: "Hugging Face", url: "https://platzi.com/cursos/hugging-face/", date: "2024" },
                     { name: "LLMs", url: "https://platzi.com/cursos/llms/", date: "2024" },
@@ -546,12 +507,23 @@
             {
                 week: 11,
                 block: "AI Engineering",
-                title: "RAG",
-                desc: "Chat con Documentos.",
-                study_guide: "<div><h4 class='font-bold mb-2'>1. Embeddings</h4><p class='text-sm text-gray-500 mb-2'>Vectores.</p><h4 class='font-bold mb-2'>2. Vector DB</h4><p class='text-sm text-gray-500'>ChromaDB.</p></div>",
-                criteria: ["Generar embeddings", "Guardar ChromaDB", "Búsqueda semántica", "Contexto LLM"],
-                project: "Buscador Semántico.",
-                concept: "Contexto",
+                title: "RAG (Chat Docs)",
+                desc: "Retrieval Augmented Generation. Chat con tus PDFs.",
+                study_guide: `
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-bold text-gray-900 dark:text-gray-100 mb-2">1. Embeddings</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Convertir texto a vectores numéricos.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 dark:text-gray-100 mb-2">2. Vector DB</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Uso de <strong>ChromaDB</strong> para búsqueda semántica.</p>
+                        </div>
+                    </div>
+                `,
+                criteria: ["Generar embeddings de texto", "Guardar en ChromaDB", "Búsqueda semántica", "Inyectar contexto al Prompt"],
+                project: "Chat con Manuales de Operación: Sistema para consultar PDFs técnicos de logística y obtener citas exactas.",
+                concept: "Búsqueda Semántica",
                 courses: [
                     { name: "LangChain", url: "https://platzi.com/cursos/langchain-chatbots/", date: "Jul 2023" },
                     { name: "LangChain Docs", url: "https://platzi.com/cursos/langchain-documents/", date: "Nov 2023" },
@@ -563,11 +535,22 @@
                 week: 12,
                 block: "AI Engineering",
                 title: "Agentes",
-                desc: "Function Calling & Tools.",
-                study_guide: "<div><h4 class='font-bold mb-2'>1. Tools</h4><p class='text-sm text-gray-500 mb-2'>Definición JSON.</p><h4 class='font-bold mb-2'>2. Loop</h4><p class='text-sm text-gray-500'>Pensar-Actuar.</p></div>",
-                criteria: ["Tool JSON", "Request tool_call", "Ejecutar función", "Feedback"],
-                project: "Asistente SQL Natural.",
-                concept: "Agencia",
+                desc: "Darle a la IA la capacidad de ejecutar acciones.",
+                study_guide: `
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-bold text-gray-900 dark:text-gray-100 mb-2">1. Function Calling</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Definir herramientas en JSON para que el LLM decida usarlas.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 dark:text-gray-100 mb-2">2. Loop de Agente</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Pensamiento -> Acción (Python) -> Observación.</p>
+                        </div>
+                    </div>
+                `,
+                criteria: ["Definir Tool JSON", "Manejar request tool_call", "Ejecutar función real", "Devolver resultado al LLM"],
+                project: "Agente de Re-stocking: Bot que revisa inventario en SQL y redacta email de compra si el stock es bajo.",
+                concept: "Automatización Autónoma",
                 courses: [
                     { name: "Agentes IA", url: "https://platzi.com/cursos/agentes-ia/", date: "2024" },
                     { name: "LangChain Agentes", url: "https://platzi.com/cursos/langchain-agentes/", date: "2024" },
@@ -580,11 +563,11 @@
                 week: 13,
                 block: "Proyecto Final",
                 title: "Arquitectura",
-                desc: "Planificación.",
-                study_guide: "<div><p class='text-sm text-gray-500'>Diagramas y Git.</p></div>",
-                criteria: ["Diagrama", "Esquema DB", "Repo Git"],
-                project: "Documento TDD.",
-                concept: "Diseño",
+                desc: "Planificación profesional antes de escribir código.",
+                study_guide: "<div><h4 class='font-bold text-gray-900 dark:text-gray-100 mb-2'>1. Diseño de Sistemas</h4><p class='text-sm text-gray-600 dark:text-gray-400 mb-2'>Diagramas de flujo de datos.</p></div>",
+                criteria: ["Diagrama completo (Excalidraw)", "Esquema DB definido", "Repo Git creado"],
+                project: "TDD: Sistema de Despacho Autónomo.",
+                concept: "Arquitectura de Software",
                 courses: [
                     { name: "Arquitectura Software", url: "https://platzi.com/cursos/fundamentos-arquitectura-software/", date: "May 2025" },
                     { name: "Git GitHub", url: "https://platzi.com/cursos/git-github/", date: "2024" },
@@ -596,11 +579,11 @@
                 week: 14,
                 block: "Proyecto Final",
                 title: "Backend Core",
-                desc: "Construcción.",
-                study_guide: "<div><p class='text-sm text-gray-500'>Implementación.</p></div>",
-                criteria: ["API OK", "Postgres OK", "Ingesta OK"],
-                project: "Backend Funcional.",
-                concept: "Construcción",
+                desc: "Construcción de la infraestructura base.",
+                study_guide: "<div><h4 class='font-bold text-gray-900 dark:text-gray-100 mb-2'>1. Implementación</h4><p class='text-sm text-gray-600 dark:text-gray-400 mb-2'>FastAPI + Postgres.</p></div>",
+                criteria: ["API corriendo", "Postgres conectado", "Ingesta de datos lista"],
+                project: "API Core de Logística.",
+                concept: "Infraestructura Backend",
                 courses: [
                     { name: "Arquitectura Aplicada", url: "https://platzi.com/cursos/software-avanzado/", date: "Jul 2025" },
                     { name: "Docker", url: "https://platzi.com/cursos/docker/", date: "2024" },
@@ -612,11 +595,11 @@
                 week: 15,
                 block: "Proyecto Final",
                 title: "Cerebro IA",
-                desc: "Integración.",
-                study_guide: "<div><p class='text-sm text-gray-500'>RAG y Agentes.</p></div>",
-                criteria: ["RAG OK", "Agente OK"],
-                project: "Sistema Inteligente.",
-                concept: "Inteligencia",
+                desc: "Integración de RAG y Router.",
+                study_guide: "<div><h4 class='font-bold text-gray-900 dark:text-gray-100 mb-2'>1. Lógica IA</h4><p class='text-sm text-gray-600 dark:text-gray-400 mb-2'>Pipeline RAG.</p></div>",
+                criteria: ["Pipeline RAG OK", "Agente funcional"],
+                project: "Brain Module: RAG + Router.",
+                concept: "Orquestación Cognitiva",
                 courses: [
                     { name: "Ingeniería Datos Python", url: "https://platzi.com/cursos/ingenieria-datos-python/", date: "2024" },
                     { name: "MLOps", url: "https://platzi.com/cursos/mlops/", date: "2024" },
@@ -628,11 +611,11 @@
                 week: 16,
                 block: "Proyecto Final",
                 title: "Frontend & Entrega",
-                desc: "UI y Pitch.",
-                study_guide: "<div><p class='text-sm text-gray-500'>Streamlit y Demo.</p></div>",
-                criteria: ["UI OK", "Video OK", "Post OK"],
-                project: "Terminado.",
-                concept: "Despliegue",
+                desc: "Empaquetado y demo del producto.",
+                study_guide: "<div><h4 class='font-bold text-gray-900 dark:text-gray-100 mb-2'>1. Despliegue</h4><p class='text-sm text-gray-600 dark:text-gray-400 mb-2'>Streamlit UI y Pitch.</p></div>",
+                criteria: ["UI Streamlit", "Video Demo", "Post LinkedIn"],
+                project: "Launch: Demo Video & Repo.",
+                concept: "Producto Mínimo Viable",
                 courses: [
                     { name: "Streamlit", url: "https://platzi.com/cursos/streamlit/", date: "2024" },
                     { name: "Marca Personal", url: "https://platzi.com/cursos/marca-personal/", date: "2024" },
@@ -732,7 +715,6 @@
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
-                        <!-- CHECKLIST -->
                         <div class="glass-panel p-8 rounded-3xl h-full transition-colors">
                             <h3 class="text-sm font-bold text-gray-900 dark:text-gray-100 uppercase tracking-wide mb-6 flex items-center gap-2">
                                 <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
@@ -748,7 +730,6 @@
                             </ul>
                         </div>
 
-                        <!-- PROJECT -->
                         <div class="flex flex-col gap-6 h-full">
                             <div class="bg-gradient-to-br from-gray-900 to-gray-800 dark:from-gray-800 dark:to-black text-white p-8 rounded-3xl shadow-xl relative overflow-hidden group flex-grow transition-colors">
                                 <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wide mb-2">Proyecto Práctico</h3>
@@ -768,7 +749,6 @@
                         </div>
                     </div>
 
-                    <!-- COURSES -->
                     <div class="mt-10">
                         <h3 class="text-sm font-bold text-gray-900 dark:text-gray-100 uppercase tracking-wide mb-4 flex items-center gap-2">
                             <span class="text-xl">🚀</span> Ruta de Aprendizaje Platzi (4 Cursos)
